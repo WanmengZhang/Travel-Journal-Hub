@@ -114,7 +114,8 @@ def get_entries():
         connection.close()
         return jsonify({'entries': entries})
     except Error as e:
-        return jsonify({'error': str(e)}), 500
+        print(f"Database error: {e}")
+        return jsonify({'error': 'Failed to retrieve entries'}), 500
 
 
 @app.route('/api/entries/<int:entry_id>', methods=['GET'])
@@ -151,7 +152,8 @@ def get_entry(entry_id):
             connection.close()
             return jsonify({'error': 'Entry not found'}), 404
     except Error as e:
-        return jsonify({'error': str(e)}), 500
+        print(f"Database error: {e}")
+        return jsonify({'error': 'Failed to retrieve entry'}), 500
 
 
 @app.route('/api/entries', methods=['POST'])
@@ -191,7 +193,8 @@ def create_entry():
             'entry_id': entry_id
         }), 201
     except Error as e:
-        return jsonify({'error': str(e)}), 500
+        print(f"Database error: {e}")
+        return jsonify({'error': 'Failed to create entry'}), 500
 
 
 @app.route('/api/entries/<int:entry_id>', methods=['PUT'])
@@ -233,7 +236,8 @@ def update_entry(entry_id):
         
         return jsonify({'message': 'Entry updated successfully'})
     except Error as e:
-        return jsonify({'error': str(e)}), 500
+        print(f"Database error: {e}")
+        return jsonify({'error': 'Failed to update entry'}), 500
 
 
 @app.route('/api/entries/<int:entry_id>', methods=['DELETE'])
@@ -261,7 +265,8 @@ def delete_entry(entry_id):
         
         return jsonify({'message': 'Entry deleted successfully'})
     except Error as e:
-        return jsonify({'error': str(e)}), 500
+        print(f"Database error: {e}")
+        return jsonify({'error': 'Failed to delete entry'}), 500
 
 
 if __name__ == '__main__':
@@ -269,4 +274,6 @@ if __name__ == '__main__':
     init_db()
     
     # Run the app
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    # Note: In production, use a WSGI server like gunicorn instead of the development server
+    debug_mode = os.getenv('FLASK_ENV') == 'development'
+    app.run(debug=debug_mode, host='0.0.0.0', port=5000)
