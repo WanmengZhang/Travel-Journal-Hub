@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Journal Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Travel Journal Hub</h1>
+            <p class="subtitle">Document, organize, and revisit your travel experiences</p>
+        </header>
+
+        <main>
+            <!-- Add Entry Form -->
+            <section class="form-section" id="formSection">
+                <h2 id="formTitle">Add New Entry</h2>
+                <form id="entryForm">
+                    <input type="hidden" id="entryId">
+                    
+                    <div class="form-group">
+                        <label for="title">Title *</label>
+                        <input type="text" id="title" name="title" required 
+                               placeholder="e.g., Amazing Weekend in Paris">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <input type="text" id="location" name="location" required 
+                               placeholder="e.g., Paris, France">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="travel_date">Travel Date *</label>
+                        <input type="date" id="travel_date" name="travel_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="content">Content *</label>
+                        <textarea id="content" name="content" rows="6" required 
+                                  placeholder="Describe your travel experience..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image_url">Image URL (optional)</label>
+                        <input type="url" id="image_url" name="image_url" 
+                               placeholder="https://example.com/image.jpg">
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">Add Entry</button>
+                        <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Entries List -->
+            <section class="entries-section">
+                <h2>Your Travel Memories</h2>
+                <div id="entriesContainer" class="entries-grid">
+                    <p class="loading">Loading entries...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Entry Detail Modal -->
+    <div id="entryModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
